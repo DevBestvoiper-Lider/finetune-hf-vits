@@ -27,8 +27,15 @@ def plot_spectrogram_to_numpy(spectrogram):
     plt.tight_layout()
 
     fig.canvas.draw()
-    data = np.frombuffer(fig.canvas.tostring_rgb(), dtype=np.uint8)
+    # Obtener la imagen en formato RGBA
+    data = np.array(fig.canvas.renderer.buffer_rgba())
+    
+    # Si solo necesitas los valores RGB, elimina el canal alfa (el cuarto canal)
+    data = data[:, :, :3]
+    
+    # Redimensionar los datos para que coincidan con las dimensiones esperadas
     data = data.reshape(fig.canvas.get_width_height()[::-1] + (3,))
+
     plt.close()
     return data
 
@@ -56,7 +63,14 @@ def plot_alignment_to_numpy(alignment, info=None):
     plt.tight_layout()
 
     fig.canvas.draw()
-    data = np.frombuffer(fig.canvas.tostring_rgb(), dtype=np.uint8)
+        # Obtener la imagen en formato RGBA
+    data = np.array(fig.canvas.renderer.buffer_rgba())
+    
+    # Si solo necesitas los valores RGB, elimina el canal alfa (el cuarto canal)
+    data = data[:, :, :3]
+    
+    # Redimensionar los datos para que coincidan con las dimensiones esperadas
     data = data.reshape(fig.canvas.get_width_height()[::-1] + (3,))
+
     plt.close()
     return data
