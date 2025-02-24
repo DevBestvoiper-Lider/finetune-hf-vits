@@ -8,5 +8,5 @@ fi
 
 # Luego, inicializa tu lógica
 echo "Inicializando entorno virtual..."
-cd /workspace/BestAnalyticBackend
+cd /workspace/finetune-hf-vits
 bash start.sh
